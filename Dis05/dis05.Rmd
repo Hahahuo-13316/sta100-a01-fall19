@@ -1,0 +1,89 @@
+---
+title: "F19 STA 100 A01 Discussion 05"
+author: "Yishan Huang"
+date: "2019/10/29"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Discussion Time: Tuesday 8:00 -- 8:50 am, Haring Hall 1204.
+
+Notes: https://github.com/Hahahuo-13316/sta100-a01-fall19
+
+Office hour: Tuesday 12:00 -- 1:00 pm, Mathematical Sciences Building 1117.
+
+Email: yishuang\@ucdavis.edu
+
+Announcement: Today we will talk about the answer to quiz 1. If you have any question on your paper, please tell me before we talking about the answer.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Binomial Distribution
+
+For binomial random variable $X \sim \textrm{Binomial}(n, p)$, we know that $\mathbb{P}(X = k) = {n \choose k}p^k(1 - p)^{(n - k)}$. We call $p(k) = \mathbb{P}(X = k)$ the probability mass function (pmf) of $X$, and $F(k) = \mathbb{P}(X \le k) = p(0) + p(1) + \cdots + p(k)$ be the cumulative distribution function (cdf).
+```{r}
+dbinom(x = 0:20, size = 20, prob = 0.4)
+pbinom(q = 0:20, size = 20, prob = 0.4)
+qbinom(p = 0.01, size = 20, prob = 0.4)
+```
+
+```{r}
+library(RColorBrewer)
+pal <- brewer.pal(8, "Dark2")
+x <- rbinom(100000, size = 50, prob = 0.4)
+hist(x, breaks = c(0:50), col = pal[1])
+```
+
+Notice that, the quantile function $q(p)$ is the smallest $x$ such that $F(x) \ge p$.
+
+## Normal Distribution
+
+```{r}
+x1 <- (-300:300)/100
+plot(x1, dnorm(x1), col = pal[1], type = "l", lwd = 3, xlab = "quantile", ylab = "density",
+     main = "Probability density function of standard normal distribution")
+2 * pnorm(c(1, 2, 3)) - 1
+```
+
+Example: the symmetric interval that covers 90\% area of the density of $X = 3Z + 2$ is?
+
+```{r}
+qnorm(p = c(0.05, 0.95), mean = 2, sd = 3)
+```
+
+### Q-Q plots
+```{r}
+x2 <- rnorm(10000, mean = 7, sd = 2)
+x0 <- x2^2
+qqnorm(x0, pch = 16, cex = 0.5, col = pal[1])
+qqline(x0, col = pal[2])
+x3 <- sqrt(x0)
+qqnorm(x3, pch = 16, cex = 0.5, col = pal[1])
+qqline(x3, col = pal[2])
+qqnorm(x, pch = 16, cex = 0.5, col = pal[1])
+qqline(x, col = pal[2])
+```
+
+## Problems
+
+(4.3.9) The serum cholesterol levels of 12- to 14-year-olds follow a normal distribution with mean 155 mg/dl and standard deviation 27 mg/dl. What percentage of 12 to 14-year-olds have serum cholesterol values
+(a) 164 or more?
+(b) 137 or less?
+(c) 186 or less?
+(d) 100 or more?
+(e) between 159 and 186?
+(f) between 100 and 132?
+(g) between 132 and 159?
+
+```{r}
+1 - pnorm(164, mean = 155, sd = 27)
+pnorm(137, mean = 155, sd = 27)
+pnorm(186, mean = 155, sd = 27)
+1 - pnorm(164, mean = 155, sd = 27)
+pnorm(186, mean = 155, sd = 27) - pnorm(159, mean = 155, sd = 27)
+pnorm(132, mean = 155, sd = 27) - pnorm(100, mean = 155, sd = 27)
+pnorm(159, mean = 155, sd = 27) - pnorm(132, mean = 155, sd = 27)
+```
