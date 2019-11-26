@@ -1,1 +1,32 @@
+---
+title: "F19 STA 100 A01 Discussion 09"
+author: "Yishan Huang"
+date: "2019/11/26"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Discussion Time: Tuesday 8:00 -- 8:50 am, Haring Hall 1204.
+
+Notes: https://github.com/Hahahuo-13316/sta100-a01-fall19
+
+Office hour: Tuesday 12:00 -- 1:00 pm, Mathematical Sciences Building 1117.
+
+Email: yishuang\@ucdavis.edu
+
+## How to calculate $t$-distribution using R
+
+Example: let $Y_1, \dots, Y_n$ be a random sample from distribution $N(\mu, \sigma^2)$, where $\sigma^2$ is unknown. Suppose $n = 10$, sample mean $\bar Y = 2.6$, the standard error of sample mean is $s = 0.5$.
+
+- Construct a $95\%$ confidence interval for $\mu$.
+- Perform a two-sided $t$-test to find out whether $\mu = 1.23$, with significant level $\alpha = 0.02$. 
+
+```{r}
+2.6 + c(lower.bound = -1, upper.bound = 1) * qt(0.975, 9) * 0.5
+
+c(p.value = 2 * (1 - pt((2.6 - 1.23) / 0.5, 9)), significant.level = 0.02)
+
+c(ts = (2.6 - 1.23) / 0.5, critical.value = qt(0.99, 9))
+```
 
