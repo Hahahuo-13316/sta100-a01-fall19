@@ -14,4 +14,5 @@ Email: yishuang\@ucdavis.edu
 - Discussion 6 (2019/11/05): Review of chapter 4 & 5. With some exercises.
 - Discussion 7 (2019/11/12): Review of chapter 6 (confidence intervals).
 - Discussion 8 (2019/11/19): Review of chapter 7 & 8 (hypothesis testing), with selected problems.
+- Discussion 9 (2019/11/26): R about t-distribution.
 
